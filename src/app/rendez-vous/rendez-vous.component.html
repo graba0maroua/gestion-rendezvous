@@ -30,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let rendezvous of filteredRendezVousList">
+      <tr *ngFor="let rendezvous of rendezVousList">
         <td>{{ rendezvous.date }}</td>
         <td>{{ rendezvous.heure }}</td>
         <td>{{ rendezvous.price }}</td>
@@ -41,6 +41,19 @@
             'status-cancelled': rendezvous.status === 'Annuler'
           }">
           {{ rendezvous.status }}
+        </td>
+        <td>
+          <!-- Boutons dynamiques selon le statut -->
+          <button
+            *ngIf="rendezvous.status === 'En attente'"
+            (click)="confirmerRendezVous(rendezvous)">
+            Réserver
+          </button>
+          <button
+            *ngIf="rendezvous.status === 'Confirmer'"
+            (click)="annulerRendezVous(rendezvous)">
+            Annuler
+          </button>
         </td>
       </tr>
     </tbody>

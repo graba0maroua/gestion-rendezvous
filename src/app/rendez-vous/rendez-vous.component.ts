@@ -12,6 +12,21 @@ export class RendezVousComponent {
     { date: '2024-12-02', heure: '11:30', price: 2000, professional: 'Dr. John', status: 'En attente' },
     { date: '2024-12-01', heure: '09:00', price: 1200, professional: 'Dr. Smith', status: 'Annuler' }
   ];
+// Confirmer un rendez-vous
+confirmerRendezVous(rendezvous: any): void {
+  if (rendezvous.status === 'En attente') {
+    rendezvous.status = 'Confirmer';
+    alert(`Le rendez-vous avec ${rendezvous.professional} a été confirmé.`);
+  }
+}
+
+// Annuler un rendez-vous
+annulerRendezVous(rendezvous: any): void {
+  if (rendezvous.status === 'Confirmer') {
+    rendezvous.status = 'En attente';
+    alert(`Le rendez-vous avec ${rendezvous.professional} a été annulé.`);
+  }
+}
 
   // Filtered list for display
   filteredRendezVousList = [...this.rendezVousList];
@@ -33,4 +48,5 @@ export class RendezVousComponent {
       return matchesDate && matchesProfessional && matchesStatus;
     });
   }
+
 }
