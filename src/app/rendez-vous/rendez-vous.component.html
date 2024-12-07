@@ -1,6 +1,5 @@
 <div class="rendez-vous-container">
   <h1>Rendez-Vous List</h1>
-
   <!-- Filters -->
   <div class="filters">
     <label for="date-filter">Filter by Date:</label>
@@ -18,6 +17,17 @@
     </select>
   </div>
 
+  <div class="global-notification-settings">
+    <h2>Notification Settings</h2>
+    <label for="global-notification-hours">Notify me before:</label>
+    <input
+      type="number"
+      id="global-notification-hours"
+      [(ngModel)]="globalNotificationHours"
+      placeholder="Hours before"
+    />
+    <button (click)="setGlobalNotification()">Set Notification</button>
+  </div>
   <!-- Rendezvous Table -->
   <table>
     <thead>
@@ -27,10 +37,11 @@
         <th>Price (DZD)</th>
         <th>Professional</th>
         <th>Status</th>
+        <th>Notification Settings</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let rendezvous of rendezVousList">
+      <tr *ngFor="let rendezvous of filteredRendezVousList">
         <td>{{ rendezvous.date }}</td>
         <td>{{ rendezvous.heure }}</td>
         <td>{{ rendezvous.price }}</td>
@@ -43,7 +54,8 @@
           {{ rendezvous.status }}
         </td>
         <td>
-          <!-- Boutons dynamiques selon le statut -->
+
+          <!-- Dynamic Buttons -->
           <button
             *ngIf="rendezvous.status === 'En attente'"
             (click)="confirmerRendezVous(rendezvous)">

@@ -7,6 +7,9 @@ import { UserSignupComponent } from './user-signup/user-signup.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { RendezVousComponent } from './rendez-vous/rendez-vous.component';
 import { FormsModule } from '@angular/forms';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { HomeComponent } from './home/home.component';
+import { DisponibilitesComponent } from './disponibilites/disponibilites.component';
 
 
 @NgModule({
@@ -15,6 +18,9 @@ import { FormsModule } from '@angular/forms';
     UserSignupComponent,
     UserLoginComponent,
     RendezVousComponent,
+    ConfirmationComponent,
+    HomeComponent,
+    DisponibilitesComponent,
 
   ],
   imports: [

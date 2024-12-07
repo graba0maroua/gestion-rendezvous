@@ -64,4 +64,22 @@ th {
       background-color: #0056b3;
     }
   }
+  .global-notification-settings {
+
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  .global-notification-settings h2 {
+    margin: 0 0 10px;
+  }
+
+  .global-notification-settings input {
+    width: 50px;
+    margin-right: 10px;
+  }
+
 }
