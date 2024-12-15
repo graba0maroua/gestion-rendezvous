@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 export class HomeComponent {
   constructor(private router: Router) {}
 
-  navigateTo(page: string): void {
-    this.router.navigate([`/${page}`]);
+  navigateToBooking() {
+    this.router.navigate(['/book-appointement']);
+  }
+
+  navigateToRendezvous() {
+    this.router.navigate(['/rendezvous']);
   }
 }

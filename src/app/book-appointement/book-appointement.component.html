@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Réservez un rendez-vous</h1>
+  <div class="filter">
+    <label for="profession">Profession: </label>
+    <input type="text" id="profession" [(ngModel)]="selectedProfession" placeholder="Filtrer par profession">
+
+    <label for="professionalName">Nom du professionnel: </label>
+    <input type="text" id="professionalName" [(ngModel)]="selectedProfessionalName" placeholder="Filtrer par nom">
+
+    <button (click)="fetchAvailableSlots()" class="btn btn-secondary">Filtrer</button>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Professionnel</th>
+        <th>Profession</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Prix</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let slot of availableSlots">
+        <td>{{ slot.user.name }}</td>
+        <td>{{ slot.user.profession }}</td>
+        <td>{{ slot.disponibility.date }}</td>
+        <td>{{ slot.disponibility.time }}</td>
+        <td>{{ slot.disponibility.price }} DA</td>
+        <td>
+          <button (click)="bookRendezvous(slot.disponibility.id)" class="btn btn-primary">Réserver</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
