@@ -1,0 +1,77 @@
+<div class="auth-container">
+  <mat-card class="auth-card">
+    <h2 class="auth-title">Sign Up</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="signupForm.get('name')?.hasError('required')">
+          Name is required
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('name')?.hasError('minlength')">
+          Name must be at least 3 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error *ngIf="signupForm.get('email')?.hasError('required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('email')?.hasError('email')">
+          Enter a valid email
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="dobPicker" formControlName="dateOfBirth" />
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+        <mat-error *ngIf="signupForm.get('dateOfBirth')?.hasError('required')">
+          Date of Birth is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phone" />
+        <mat-error *ngIf="signupForm.get('phone')?.hasError('required')">
+          Phone number is required
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('phone')?.hasError('pattern')">
+          Enter a valid 10-digit phone number
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="client">Client</mat-option>
+          <mat-option value="professional">Professional</mat-option>
+        </mat-select>
+        <mat-error *ngIf="signupForm.get('role')?.hasError('required')">
+          Role is required
+        </mat-error>
+      </mat-form-field>
+
+      <div *ngIf="signupForm.get('role')?.value === 'professional'">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Profession</mat-label>
+          <input matInput formControlName="profession" />
+          <mat-error *ngIf="signupForm.get('profession')?.hasError('required')">
+            Profession is required for professionals
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" class="full-width" [disabled]="!signupForm.valid">Sign Up</button>
+    </form>
+
+    <div class="auth-footer">
+      <span>Already have an account?</span>
+      <a routerLink="/login" class="auth-link">Log in</a>
+    </div>
+  </mat-card>
+</div>

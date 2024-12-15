@@ -1,0 +1,16 @@
+.container {
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      margin: 0;
+    }
+
+    .add-disponibility-button {
+      margin-left: auto; /* Move the button to the extreme right */
+      width: 150px; /* Fixed width for the button */
+    }
+  }
+}

@@ -1,0 +1,131 @@
+<div class="container">
+  <h1 class="my-4">Mes rendez-vous</h1>
+
+  <!-- Rendezvous List Table -->
+  <table class="table table-hover table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nom</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Statut</th>
+        <th>Rendez-vous</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rendezvous of rendezvousList">
+        <td>{{ rendezvous.name }}</td>
+        <td>{{ rendezvous.date }}</td>
+        <td>{{ rendezvous.time }}</td>
+        <td>
+          <span class="badge"
+                [ngClass]="{
+                  'bg-success': rendezvous.status === 'confirmé',
+                  'bg-warning': rendezvous.status === 'en attente',
+                  'bg-danger': rendezvous.status === 'annulé'
+                }">
+            {{ rendezvous.status }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-secondary btn-sm" (click)="fetchDetails(rendezvous)">Voir détails</button>
+        </td>
+        <td>
+          <button
+          *ngIf="rendezvous.status === 'en attente' || rendezvous.status === 'confirmé'"
+          class="btn btn-warning btn-sm"
+            (click)="cancelRendezvous(rendezvous.id)"
+          >
+            Annuler
+          </button>
+          <button
+            *ngIf="rendezvous.status === 'en attente'"
+            class="btn btn-success btn-sm"
+            (click)="confirmRendezvous(rendezvous.id)"
+          >
+            Confirmer
+          </button>
+          <button
+            *ngIf="rendezvous.status === 'annulé'"
+            class="btn btn-danger btn-sm"
+            (click)="deleteRendezvous(rendezvous.id)"
+          >
+            Supprimer
+          </button>
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="rendezvousList.length === 0" class="text-center">Aucun rendez-vous trouvé.</p>
+
+ <!-- Selected Rendezvous Details -->
+<div *ngIf="selectedRendezvousDetails" class="card mt-4 shadow">
+  <div class="card-header bg-primary text-white text-center">
+    <h2 class="mb-0">Détails du Rendez-vous</h2>
+  </div>
+  <div class="card-body p-4">
+    <div class="row">
+      <!-- Client Details -->
+      <div class="col-md-6 mb-4">
+        <h4 class="text-secondary border-bottom pb-2">Client</h4>
+        <table class="table table-borderless table-sm">
+          <tbody>
+            <tr>
+              <td><strong>Nom:</strong></td>
+              <td>{{ selectedRendezvousDetails.user.name }}</td>
+            </tr>
+            <tr>
+              <td><strong>Email:</strong></td>
+              <td>{{ selectedRendezvousDetails.user.email }}</td>
+            </tr>
+            <tr>
+              <td><strong>Téléphone:</strong></td>
+              <td>{{ selectedRendezvousDetails.user.phoneNumber }}</td>
+            </tr>
+            <tr>
+              <td><strong>Téléphone:</strong></td>
+              <td>{{ selectedRendezvousDetails.user.dateNaissance }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <!-- Rendezvous Summary -->
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="text-secondary border-bottom pb-2">Résumé du Rendez-vous</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td><strong>Date:</strong></td>
+              <td>{{ selectedRendezvousDetails.disponibility.disponibility.date }}</td>
+            </tr>
+            <tr>
+              <td><strong>Heure:</strong></td>
+              <td>{{ selectedRendezvousDetails.disponibility.disponibility.time }}</td>
+            </tr>
+            <tr>
+              <td><strong>Status:</strong></td>
+              <td>
+                <span class="badge"
+                      [ngClass]="{
+                        'bg-success': selectedRendezvousDetails.rendezvous.status === 'confirmé',
+                        'bg-warning': selectedRendezvousDetails.rendezvous.status === 'en attente',
+                        'bg-danger': selectedRendezvousDetails.rendezvous.status === 'annulé'
+                      }">
+                  {{ selectedRendezvousDetails.rendezvous.status }}
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Prix:</strong></td>
+              <td>{{ selectedRendezvousDetails.disponibility.disponibility.price }} DZD</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
